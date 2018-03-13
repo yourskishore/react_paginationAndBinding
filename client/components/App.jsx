@@ -21,8 +21,8 @@ class App extends React.Component {
   handlePagination(e) {
     this.fetchInitialData(e.target.value);
   }
-  handleDataBinding(e){
-    const extendUrl = url + '_start=0&_limit='+e.target.value
+  handleDataBinding(e) {
+    const extendUrl = url + '_start=0&_limit=' + e.target.value
     this.getserverData(extendUrl);
   }
   getserverData(extendUrl) {
@@ -38,19 +38,32 @@ class App extends React.Component {
     console.log(response);
     return (
       <div>
-        <h3>simon, helloworld!!!</h3>
-        <ul>
-          {response.map(function (value, id) {
-            return (<li key={id}>{value.title}</li>)
-          })}
-        </ul>
-        <h2>pagination: </h2>
+        <h2>Records</h2>
+        <table borderWidth="1" cellPadding="2" cellSpacing="1" width="80%">
+          <tbody>
+            <tr>
+              <th style={{background:'#ccc'}}>Id</th>
+              <th style={{background:'#ccc'}}>Title</th>
+              <th style={{background:'#ccc'}}>Body</th>
+              </tr>
+            {response.map(function (value, id) {
+              return (
+                <tr key={id}>
+                  <td style={{background:'#f5f5f5',border:'1px solid #ddd',textAlign:'center'}}>{value.id}</td>
+                  <td style={{background:'#f5f5f5',border:'1px solid #ddd'}}>{value.title}</td>
+                  <td style={{background:'#f5f5f5',border:'1px solid #ddd'}}>{value.body}</td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+        <h2>Pagination: </h2>
         <select onChange={this.handlePagination}>
           <option value='10'>10</option>
           <option value='20'>20</option>
           <option value='30'>30</option>
         </select>
-        <h2>data binding </h2>
+        <h2>Data binding: </h2>
         <select onChange={this.handleDataBinding}>
           <option value='10'>10</option>
           <option value='20'>20</option>
